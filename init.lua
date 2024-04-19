@@ -150,7 +150,7 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} ,lazy = false},
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -938,6 +938,59 @@ require('lazy').setup({
     end,
   },
 },
+
+{
+  {'akinsho/toggleterm.nvim', version = "*", opts = {
+    open_mapping = [[<leader>ter]],
+    direction = "float",
+    shade_terminals = true
+  }},
+},
+
+{
+	"ThePrimeagen/harpoon",
+	lazy = false,
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+	},  
+
+
+  
+	keys = {
+		{ "<leader>hm", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Mark file with harpoon" },
+		{ "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", desc = "Go to next harpoon mark" },
+		{ "<leader>hp", "<cmd>lua require('harpoon.ui').nav_prev()<cr>", desc = "Go to previous harpoon mark" },
+		{ "<leader>ha", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "Show harpoon marks" },
+	},
+},
+
+{
+  '0x00-ketsu/autosave.nvim',
+  config = function()
+      local autosave = require('autosave')
+      autosave.setup(
+          {
+              enable = true,
+              prompt_style = 'stdout',
+              prompt_message = function()
+                return 'Autosave: saved at ' .. vim.fn.strftime('%H:%M:%S')
+              end,
+              events = {'InsertLeave', 'TextChanged'},
+              conditions = {
+                  exists = true,
+                  modifiable = true,
+                  filename_is_not = {},
+                  filetype_is_not = {}
+              },
+              write_all_buffers = false,
+              debounce_delay = 135
+          }
+      )
+  end
+},
+
+
+
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
