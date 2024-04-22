@@ -955,7 +955,6 @@ require('lazy').setup({
 	},  
 
 
-  
 	keys = {
 		{ "<leader>hm", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "Mark file with harpoon" },
 		{ "<leader>hn", "<cmd>lua require('harpoon.ui').nav_next()<cr>", desc = "Go to next harpoon mark" },
@@ -964,30 +963,6 @@ require('lazy').setup({
 	},
 },
 
-{
-  '0x00-ketsu/autosave.nvim',
-  config = function()
-      local autosave = require('autosave')
-      autosave.setup(
-          {
-              enable = true,
-              prompt_style = 'stdout',
-              prompt_message = function()
-                return 'Autosave: saved at ' .. vim.fn.strftime('%H:%M:%S')
-              end,
-              events = {'InsertLeave', 'TextChanged'},
-              conditions = {
-                  exists = true,
-                  modifiable = true,
-                  filename_is_not = {},
-                  filetype_is_not = {}
-              },
-              write_all_buffers = false,
-              debounce_delay = 135
-          }
-      )
-  end
-},
 
 
 
